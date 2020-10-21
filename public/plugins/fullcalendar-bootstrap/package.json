@@ -1,0 +1,61 @@
+{
+  "_from": "@fullcalendar/bootstrap@^4.4.0",
+  "_id": "@fullcalendar/bootstrap@4.4.2",
+  "_inBundle": false,
+  "_integrity": "sha512-zxtQvpZqr7zeBCfszo/i1e4zCvGwLh2zOp8J6Wxw5s73HsB1zuftWop7sPO+qhRrhX5MdM9i/wr8/nNY8BZSmw==",
+  "_location": "/@fullcalendar/bootstrap",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@fullcalendar/bootstrap@^4.4.0",
+    "name": "@fullcalendar/bootstrap",
+    "escapedName": "@fullcalendar%2fbootstrap",
+    "scope": "@fullcalendar",
+    "rawSpec": "^4.4.0",
+    "saveSpec": null,
+    "fetchSpec": "^4.4.0"
+  },
+  "_requiredBy": [
+    "/admin-lte"
+  ],
+  "_resolved": "https://registry.npmjs.org/@fullcalendar/bootstrap/-/bootstrap-4.4.2.tgz",
+  "_shasum": "b396aa39fd2e49c1bfb68deb677df5a5544bb924",
+  "_spec": "@fullcalendar/bootstrap@^4.4.0",
+  "_where": "E:\\source\\repos\\perso\\testreact\\espace-client\\node_modules\\admin-lte",
+  "author": {
+    "name": "Adam Shaw",
+    "email": "arshaw@arshaw.com",
+    "url": "http://arshaw.com/"
+  },
+  "bugs": {
+    "url": "https://fullcalendar.io/reporting-bugs"
+  },
+  "bundleDependencies": false,
+  "copyright": "2019 Adam Shaw",
+  "deprecated": false,
+  "description": "Bootstrap 4 theming for your calendar",
+  "docs": "https://fullcalendar.io/docs/bootstrap-theme",
+  "homepage": "https://fullcalendar.io/",
+  "keywords": [
+    "calendar",
+    "event",
+    "full-sized"
+  ],
+  "license": "MIT",
+  "main": "main.js",
+  "module": "main.esm.js",
+  "name": "@fullcalendar/bootstrap",
+  "peerDependencies": {
+    "@fullcalendar/core": "~4.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fullcalendar/fullcalendar.git",
+    "homepage": "https://github.com/fullcalendar/fullcalendar"
+  },
+  "title": "FullCalendar Bootstrap Plugin",
+  "types": "main.d.ts",
+  "unpkg": "main.min.js",
+  "version": "4.4.2"
+}
