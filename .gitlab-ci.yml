@@ -43,7 +43,7 @@ docker:deploy:
   stage: deploy_server
   image: tiangolo/docker-with-compose
   variables:
-    DOCKER_HOST: ''
+    DOCKER_HOST: 'unix:///var/run/docker.sock'
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker info
