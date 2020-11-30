@@ -1,12 +1,12 @@
 const prod = {
     url: {
-        API_URL: 'https://dolibarr.maxime-laplanche.fr/api',
+        API_URL: 'https://dolibarr.mltech.fr/api/index.php',
     }
 };
 
 const dev = {
     url: {
-        API_URL: 'http://localhost:8083/api',
+        API_URL: 'http://localhost:8083/api/index.php',
     }
 };
 
