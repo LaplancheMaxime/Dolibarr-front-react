@@ -41,7 +41,9 @@ sonarcloud-check:
 
 docker:deploy:
   stage: deploy_server
-  image:  creatiwww/docker-compose
+  image: creatiwww/docker-compose
+  variables:
+    DOCKER_HOST: ''
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
