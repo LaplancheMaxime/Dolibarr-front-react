@@ -41,14 +41,14 @@ sonarcloud-check:
 
 docker:deploy:
   stage: deploy_server
-  image: creatiwww/docker-compose
+  image: tiangolo/docker-with-compose
   variables:
     DOCKER_HOST: ''
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker info
   script:
-    - sudo docker-compose -f docker-compose.yml build
+    - docker-compose -f docker-compose.yml build
     - docker-compose -f docker-compose.yml pull
     - docker-compose -f docker-compose.yml up -d
   rules:
