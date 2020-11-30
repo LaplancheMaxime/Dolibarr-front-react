@@ -41,7 +41,7 @@ sonarcloud-check:
 
 docker:deploy:
   stage: deploy_server
-  image: registry.gitlab.com/mlaplanche/dolibarr-front-react/docker-compose:19.03.11
+  image:  creatiwww/docker-compose
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
