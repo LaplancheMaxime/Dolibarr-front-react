@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Redirect } from "react-router-dom";
 import "../App.css";
-import axios from "axios";
-import { AuthContext, useAuth } from "../context/Auth";
+import Axios from "axios";
+import { AuthContext } from "../context/Auth";
 import { User } from "../models/User";
 
 class Login extends React.Component {
@@ -28,12 +28,14 @@ class Login extends React.Component {
   }
 
   connect() {
-    axios
+    Axios
       .post(
-        'http://localhost:8083/api/index.php/login',
+        '/login',
         {
-          "login": "arold.alexander",
-          "password": "tj5f1983",
+          // "login": "didier.laplanche",
+          // "password": "gpH28B7Bq",
+          "login": this.state.userName,
+          "password": this.state.password,
           "reset": 1
         },
         {
@@ -47,10 +49,10 @@ class Login extends React.Component {
       .then((result) => {
         if (result.status === 200 ) {
           this.context.setAuthTokens(result.data.success.token);
-          axios.defaults.headers = { 
+          Axios.defaults.headers = { 
             "DOLAPIKEY": result.data.success.token
           };
-          axios.get("http://localhost:8083/api/index.php/users/info").then(userInfo => {
+          Axios.get("/users/info").then(userInfo => {
             const userInfoData = userInfo.data
             
             let user = new User(result.data.success.token);
@@ -67,7 +69,7 @@ class Login extends React.Component {
             user.zip = userInfoData.zip;
             user.town = userInfoData.town;
 
-            axios.get("http://localhost:8083/api/index.php/thirdparties/" + user.entity).then(thridParty => {
+            Axios.get("/thirdparties/" + user.entity).then(thridParty => {
               const thridPartyData = thridParty.data;
 
               user.third_party.id = thridPartyData.id;
@@ -122,7 +124,7 @@ class Login extends React.Component {
                     className="form-control"
                     placeholder="Username"
                     value={this.state.userName}
-                    onChange={ e => this.setState({setUserName :e.target.value}) }
+                    onChange={ e => this.setState({userName :e.target.value}) }
                     />
                   <div className="input-group-append">
                     <div className="input-group-text">
@@ -136,7 +138,7 @@ class Login extends React.Component {
                     className="form-control"
                     placeholder="Password"
                     value={this.state.password}
-                    onChange={ e => this.setState({setPassword: e.target.value}) }
+                    onChange={ e => this.setState({password: e.target.value}) }
                   />
                   <div className="input-group-append">
                     <div className="input-group-text">
