@@ -1,7 +1,6 @@
 import React from "react";
-import { createPortal } from "react-dom";
-import { Route, Redirect, RouteComponentProps } from "react-router-dom";
-import { AuthContext, useAuth } from "./context/Auth";
+import { Route, Redirect } from "react-router-dom";
+import { useAuth } from "./context/Auth";
 
 function PrivateRoute({ component: Component, render, props, ...rest }) {
   const { existingTokens } = useAuth();
