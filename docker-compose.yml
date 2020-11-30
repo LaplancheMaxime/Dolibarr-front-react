@@ -1,8 +1,9 @@
-version: '3.4'
+version: '3.7'
 
 services:
   app:
-    image: Dolibarr-front-react
+    image: dolibarr-front-react
+    restart: always
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -10,3 +11,11 @@ services:
       - "VIRTUAL_HOST=my.mltech.fr"
       - "LETSENCRYPT_HOST=my.mltech.fr"
       - "NODE_ENV=production"
+    networks: 
+      - internal
+      - nginx-proxy
+
+networks: 
+  internal:
+  nginx-proxy:
+    external: true
