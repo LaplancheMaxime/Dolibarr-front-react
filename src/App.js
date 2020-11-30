@@ -12,6 +12,7 @@ import Moment from 'react-moment';
 import Axios from "axios";
 import ViewAllPropalsComponent from "./components/commercial/ViewAllPropalsComponent";
 import DashboardComponent from "./components/DashboardComponent";
+import { config } from "./constants";
 
 function App() {
 
@@ -19,9 +20,7 @@ function App() {
 
   if (localStorage.getItem("DoliToken") !== 'undefined') {
       existingTokens= JSON.parse(localStorage.getItem("DoliToken"));
-      console.log("j'ai un token", existingTokens);
   } else {
-    console.log('PAS DE TOKEN...');
     existingTokens = '';
   }
   const [authTokens, setAuthTokens] = useState(existingTokens);
@@ -31,19 +30,21 @@ function App() {
   );
 
   const setToken = (token) => {
-    console.log('mise en storage du token');
+
     localStorage.setItem("DoliToken", JSON.stringify(token));
     let o_user = new User(token);
+
     setupUser(o_user);
     setAuthTokens(token);
+    
     Axios.defaults.headers = { 
       "DOLAPIKEY": token
     };
   };
 
-  const setupUser = (user => {
-    localStorage.setItem("User", JSON.stringify(user));
-    setUser(user);
+  const setupUser = (userparam => {
+    localStorage.setItem("User", JSON.stringify(userparam));
+    setUser(userparam);
   })
 
   Moment.globalFormat = 'DD/MM/YYYY';
@@ -53,11 +54,18 @@ function App() {
   }, (error) => {
     console.log('error', error);
     console.log('error.response', error.response);
-    if (401 === error.response.status) {
+    if (401 === error.status) {
       setToken("");
       // window.location = '/login';
     }
+    return Promise.reject(error);
   });
+
+  Axios.defaults.baseURL = config.url.API_URL
+
+  Axios.defaults.headers = { 
+    "DOLAPIKEY": authTokens
+  };
 
 
   return (
