@@ -5,7 +5,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 ENV NODE_ENV=production
 COPY package.json ./
 COPY package-lock.json ./
-RUN npm ci
+RUN npm i
 COPY . ./
 RUN npm run build
 
