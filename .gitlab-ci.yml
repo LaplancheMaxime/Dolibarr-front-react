@@ -41,7 +41,7 @@ sonarcloud-check:
 
 docker:deploy:
   stage: deploy_server
-  image: tiangolo/docker-with-compose
+  image: registry.gitlab.com/mlaplanche/gestionformation-sdis14/docker-compose:19.03.11
   variables:
     DOCKER_HOST: 'unix:///var/run/docker.sock'
   before_script:
