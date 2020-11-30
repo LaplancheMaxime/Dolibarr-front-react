@@ -37,6 +37,7 @@ sonarcloud-check:
     - sonar-scanner
   only:
     - merge_requests
+    - master
 
 docker:deploy:
   stage: deploy_server
