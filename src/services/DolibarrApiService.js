@@ -5,17 +5,22 @@ import { config } from "../constants";
 class DolibarrApiService {
 
   Axios = null;
+
   AxiosConfig = {
     baseURL: config.url.API_URL,
-    headers: {
-      "DOLAPIKEY": this.context.user.dolitoken
-    },
   }
 
   constructor() {
-    this.Axios = Axios.create()
+    console.log(this.context);
+    this.Axios = Axios.create(this.AxiosConfig);
+    if (this.context?.user?.dolitoken) {
+      this.Axios.defaults.headers = {
+        headers: {
+          "DOLAPIKEY": this.context.user.dolitoken
+        },
+      }
+    }
   }
-
 }
 
 DolibarrApiService.contextType = AuthContext;
