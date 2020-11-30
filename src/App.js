@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Admin from "./components/Admin";
 import Login from "./pages/Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
@@ -79,7 +78,6 @@ function App() {
             <PrivateRoute path="/propals/:id" component={ViewPropalComponent} exact/>
             <PrivateRoute path="/propals" component={ViewAllPropalsComponent} exact />
             {/* <PrivateRoute path="/propals/1" render={() => <ViewPropalComponent User={user} />} />  */}
-            <PrivateRoute path="/admin" component={Admin} User={user} />
           </TemplateComponent>
         </Switch>
       </Router>
