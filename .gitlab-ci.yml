@@ -42,8 +42,6 @@ sonarcloud-check:
 docker:deploy:
   stage: deploy_server
   image: registry.gitlab.com/mlaplanche/gestionformation-sdis14/docker-compose:19.03.11
-  variables:
-    DOCKER_HOST: 'unix:///var/run/docker.sock'
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker info
