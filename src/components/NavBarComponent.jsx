@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import {AuthContext} from "../context/Auth"
+import {AuthContext} from "../context/Auth";
+import { config } from "../constants";
 
 class NavBarComponent extends React.Component {
 
@@ -20,7 +21,7 @@ class NavBarComponent extends React.Component {
             <a href="#" onClick={() => this.props.history.push("/")} className="nav-link">Accueil</a>
           </li>
           <li className="nav-item d-none d-sm-inline-block">
-            <a href="mailto:contact@mltech.fr" className="nav-link">Contact</a>
+            <a href={'mailto:' + config.common.MAIL_CONTACT} className="nav-link">Contact</a>
           </li>
         </ul>
         <ul className="navbar-nav ml-auto">

@@ -4,6 +4,7 @@ import "../App.css";
 import Axios from "axios";
 import { AuthContext } from "../context/Auth";
 import { User } from "../models/User";
+import {config } from "../constants"
 
 class Login extends React.Component {
 
@@ -110,7 +111,8 @@ class Login extends React.Component {
         <div className="login-box">
           <div className="login-logo">
             <a href="/">
-              <b>Admin</b>LTE
+              <img src={config.common.SITE_LOGO_URL} alt="Website logo" style={{width: '250px'}}/><br />
+              <h4>{config.common.SITE_DESCRIPTION}</h4>
             </a>
           </div>
           <div className="card">

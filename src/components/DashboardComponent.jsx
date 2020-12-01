@@ -10,8 +10,6 @@ class DashboardComponent extends React.Component {
         this.state = {
             ReadyToGo: false
         }
-
-        console.log('context', this.context, this);
     }
 
     componentDidMount() {
@@ -26,7 +24,6 @@ class DashboardComponent extends React.Component {
                 });
                 this.setState({ReadyToGo : true})
         }, (error) => {
-            console.log('error ?? ', error, error.response);
             if ((error.response && error.response.status === 404) || error.status === 404) {
                 this.setState({openPropalNumber: 0});
                 this.setState({ReadyToGo : true})

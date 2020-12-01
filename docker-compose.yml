@@ -11,6 +11,7 @@ services:
       - "VIRTUAL_HOST=my.mltech.fr"
       - "LETSENCRYPT_HOST=my.mltech.fr"
       - "NODE_ENV=production"
+      - "REACT_APP_SITE_LOGO_URL=http://localhost:8083/viewimage.php?modulepart=mycompany&file=logos%2Fthumbs%2FLogo__ML_mini.png"
     networks: 
       - internal
       - nginx-proxy
