@@ -12,6 +12,7 @@ import Axios from "axios";
 import ViewAllPropalsComponent from "./components/commercial/ViewAllPropalsComponent";
 import DashboardComponent from "./components/DashboardComponent";
 import { config } from "./constants";
+import {NotificationContainer} from 'react-notifications';
 
 function App() {
 
@@ -78,6 +79,7 @@ function App() {
             <PrivateRoute path="/propals/:id" component={ViewPropalComponent} exact/>
             <PrivateRoute path="/propals" component={ViewAllPropalsComponent} exact />
             {/* <PrivateRoute path="/propals/1" render={() => <ViewPropalComponent User={user} />} />  */}
+            <NotificationContainer />
           </TemplateComponent>
         </Switch>
       </Router>
