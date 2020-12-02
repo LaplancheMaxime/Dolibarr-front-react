@@ -5,10 +5,12 @@ services:
     image: espaceclient
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./dev.Dockerfile
     environment:
       NODE_ENV: development
+      REACT_APP_SITE_LOGO_URL_MINI: http://localhost:8083/viewimage.php?modulepart=mycompany&file=logos%2Fthumbs%2FLogo__ML_mini.png
+      REACT_APP_SITE_LOGO_URL: /dist/img/LogoMLTech.png
+      REACT_APP_SITE_NAME: MLTech
+      REACT_APP_MAIL_CONTACT: contact@mltech.fr
     ports:
-      - 3000:3000
-      - 9229:9229
-    command: ["node", "--inspect=0.0.0.0:9229", "index.js"]
+      - 3002:3000

@@ -15,6 +15,7 @@ import 'admin-lte/dist/css/adminlte.css'
 import 'admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css'
 import 'admin-lte/plugins/daterangepicker/daterangepicker.css'
 import 'admin-lte/plugins/summernote/summernote-bs4.css'
+import 'react-notifications/lib/notifications.css';
 // import 'admin-lte/plugins/jquery/jquery'
 // import 'admin-lte/plugins/jquery-ui/jquery-ui'
 // import 'admin-lte/plugins/bootstrap/js/bootstrap.bundle'

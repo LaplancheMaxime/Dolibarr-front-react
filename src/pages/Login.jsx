@@ -4,6 +4,11 @@ import "../App.css";
 import Axios from "axios";
 import { AuthContext } from "../context/Auth";
 import { User } from "../models/User";
+import {config } from "../constants"
+import NotificationContainer from "react-notifications/lib/NotificationContainer";
+import NotificationManager from 'react-notifications/lib/NotificationManager';
+import { Field, Form, Formik, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 class Login extends React.Component {
 
@@ -11,13 +16,27 @@ class Login extends React.Component {
     super(props);
     this.referer = '/dashboard';
 
+    this.authValues = {
+      email: "",
+      password: "",
+      rememberMe: false
+    }
+
+    this.formSchema = Yup.object().shape({
+      email: Yup.string().required('Email obligatoire'),
+      password: Yup.string().required('Mot de passe obligatoire')
+    })
+
+
     this.state = {
       isLoggedIn: false,
       isError: false,
-      userName: "",
-      password: "",
+      authValues: this.authValues,
       referer: "/dashboard",
     }
+
+    this.formControlClassName = 'form-control'
+    this.errorClassName = 'is-invalid'
   }
 
   componentDidMount() {
@@ -27,15 +46,14 @@ class Login extends React.Component {
     }
   }
 
-  connect() {
+  connect(values) {
+    console.log(values);
     Axios
       .post(
         '/login',
         {
-          // "login": "didier.laplanche",
-          // "password": "gpH28B7Bq",
-          "login": this.state.userName,
-          "password": this.state.password,
+          "login": values.email,
+          "password": values.password,
           "reset": 1
         },
         {
@@ -91,6 +109,15 @@ class Login extends React.Component {
         } else {
           this.setState({setIsError: true});
         }
+      }, error => {
+        console.log('error ici !!! ');
+        console.log(error, error.response);
+
+        if(error.response.status === 403) {
+          NotificationManager.error("Connexion impossible", "Identifiants incrorrects", 7000);
+        }
+        this.authValues.password = "";
+        this.setState({setIsError: true, authValues: this.authValues})
       })
       .catch((e) => {
         console.log('error catch', e);
@@ -110,67 +137,88 @@ class Login extends React.Component {
         <div className="login-box">
           <div className="login-logo">
             <a href="/">
-              <b>Admin</b>LTE
+              <img src={config.common.SITE_LOGO_URL} alt="Website logo" style={{width: '250px'}}/><br />
+              <h4>Votre espace client personalisé !</h4>
             </a>
           </div>
           <div className="card">
             <div className="card-body login-card-body">
-              <p className="login-box-msg">Sign in to start your session</p>
-  
-              <div>
-                <div className="input-group mb-3">
-                  <input 
-                    type="text"
-                    className="form-control"
-                    placeholder="Username"
-                    value={this.state.userName}
-                    onChange={ e => this.setState({userName :e.target.value}) }
-                    />
-                  <div className="input-group-append">
-                    <div className="input-group-text">
-                      <span className="fas fa-envelope"></span>
+              <p className="login-box-msg">Connexion à votre espace</p>
+
+              <Formik
+                initialValues={this.authValues}
+                onSubmit={values => {this.connect(values); }}
+                validationSchema={this.formSchema}
+              >
+                {({ errors, touched }) => (
+                  <Form >
+                  <div>
+                    <div className="input-group mb-3">
+                      <Field
+                        id="email"
+                        name="email"
+                        type="text"
+                        placeholder="Email"
+                        className={
+                            errors.email && touched.email ?
+                                this.formControlClassName +' '+ this.errorClassName 
+                            : 
+                                this.formControlClassName
+                        }
+                      />
+                      <div className="input-group-append">
+                        <div className="input-group-text">
+                          <span className="fas fa-envelope"></span>
+                        </div>
+                      </div>
+                      <ErrorMessage component="div" name="email" className="invalid-feedback text-danger" />
+                    </div>
+                    
+                    <div className="input-group mb-3">
+                    <Field
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="Mot de passe"
+                        className={
+                            errors.password && touched.password ?
+                                this.formControlClassName +' '+ this.errorClassName 
+                            : 
+                                this.formControlClassName
+                        }
+                      />
+                      <div className="input-group-append">
+                        <div className="input-group-text">
+                          <span className="fas fa-lock"></span>
+                        </div>
+                      </div>
+                      <ErrorMessage component="div" name="password" className="invalid-feedback text-danger"/>
+                    </div>
+                    <div className="row">
+                      <div className="col-7">  
+                          {/* <input className="checkbox" id="remember" /> */}
+                          <label htmlFor="rememberMe"><Field type="checkbox" name="rememberMe" /> Se souvenir de moi</label>
+                      </div>
+                      <div className="col-5">
+                        <button
+                          type="submit"
+                          className="btn btn-primary btn-block"
+                        >
+                          Connexion
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="input-group mb-3">
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Password"
-                    value={this.state.password}
-                    onChange={ e => this.setState({password: e.target.value}) }
-                  />
-                  <div className="input-group-append">
-                    <div className="input-group-text">
-                      <span className="fas fa-lock"></span>
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-8">
-                    <div className="icheck-primary">
-                      <input className="checkbox" id="remember" />
-                      <label htmlFor="remember">Remember Me</label>
-                    </div>
-                  </div>
-                  <div className="col-4">
-                    <button
-                      type="submit"
-                      onClick={ () => {this.connect()} }
-                      className="btn btn-primary btn-block"
-                    >
-                      Sign In
-                    </button>
-                  </div>
-                </div>
-              </div>
-  
+                </Form>
+              )}
+              </Formik>
               <p className="mb-1">
                 <a href="forgot-password.html">I forgot my password</a>
               </p>
             </div>
           </div>
         </div>
+        <NotificationContainer />
       </div>
     );
   }
