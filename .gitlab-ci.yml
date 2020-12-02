@@ -39,7 +39,7 @@ docker:deploy:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker info
   script:
-    - docker-compose -f docker-compose.yml build
+    - docker-compose -f docker-compose.yml build --no-cache
     - docker-compose -f docker-compose.yml pull
     - docker-compose -f docker-compose.yml up -d
   rules:
