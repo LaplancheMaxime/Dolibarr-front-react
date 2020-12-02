@@ -43,7 +43,6 @@ docker:deploy:
   stage: deploy_server
   image: registry.gitlab.com/mlaplanche/gestionformation-sdis14/docker-compose:19.03.11
   before_script:
-    - bundle install --jobs $(nproc) --path=/cache/bundler
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker-compose -f docker-compose.yml build
