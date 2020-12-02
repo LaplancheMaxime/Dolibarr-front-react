@@ -33,23 +33,11 @@ class NavBarComponent extends React.Component {
             </a>
             <ul className="dropdown-menu dropdown-menu-lg dropdown-menu-right" style={{"left": "inherit", "right": "0px"}}>
               <li className="user-header bg-primary align-middle ">
+                <img className="img-circle" src={config.url.DOLIBARR_INSTANCE + "public/theme/common/user_man.png"} alt="User"/>
+                <br />
                 <div className="text-center">
-                  <br />
                   <b>{this.context.user?.firstname} {this.context.user?.lastname}</b> <br />
                   <small>({this.context.user.login})</small>
-                  <br />
-                  <table style={{width: "100%"}}>
-                    <tbody>
-                      <tr>
-                        <td className="col-sm-1" ><i className="fas fa-at fa-sm"></i></td>
-                        <td className="col-sm-10 text-left" >{this.context.user?.email}</td>
-                      </tr>
-                      <tr>
-                        <td className="col-sm-1" ><i className="fas fa-phone fa-sm"></i></td>
-                        <td className="col-sm-10 text-left" >{this.context.user?.user_mobile}</td>
-                      </tr>
-                    </tbody>
-                  </table>
                 </div>
               </li>
               <div className="user-footer">
