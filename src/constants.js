@@ -1,6 +1,5 @@
 const common = {
     SITE_NAME: process.env.REACT_APP_SITE_NAME,
-    SITE_DESCRIPTION: process.env.REACT_APP_SITE_DESCRIPTION,
     SITE_LOGO_URL_MINI: process.env.REACT_APP_SITE_LOGO_URL_MINI,
     SITE_LOGO_URL: process.env.REACT_APP_SITE_LOGO_URL,
 
