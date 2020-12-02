@@ -9,7 +9,7 @@ services:
       dockerfile: ./Dockerfile
     environment:
       VIRTUAL_HOST: my.mltech.fr
-      LETSENCRYPT_HOST: my.mltech.fr
+      #LETSENCRYPT_HOST: my.mltech.fr
       NODE_ENV: production
       REACT_APP_SITE_LOGO_URL_MINI: https://dolibarr.mltech.fr/viewimage.php?modulepart=mycompany&file=logos%2Fthumbs%2FLogo_mini.png
       REACT_APP_SITE_LOGO_URL: /dist/img/LogoMLTech.png
