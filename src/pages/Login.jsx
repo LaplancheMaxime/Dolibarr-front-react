@@ -138,7 +138,7 @@ class Login extends React.Component {
           <div className="login-logo">
             <a href="/">
               <img src={config.common.SITE_LOGO_URL} alt="Website logo" style={{width: '250px'}}/><br />
-              <h4>{config.common.SITE_DESCRIPTION}</h4>
+              <h4>Votre espace client personalisé !</h4>
             </a>
           </div>
           <div className="card">
