@@ -15,7 +15,7 @@ class DashboardComponent extends React.Component {
     componentDidMount() {
 
         Axios.get('/proposals').then(results => {
-                results.data.map(function(propalResult, i) {
+                results.data.map((propalResult, i) => {
                     if (propalResult.statut ===1 ) {
                         this.openPropalNumber++;
                         this.setState({openPropalNumber: this.openPropalNumber});

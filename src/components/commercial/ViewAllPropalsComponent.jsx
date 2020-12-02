@@ -27,7 +27,7 @@ export class ViewAllPropalsComponent extends React.Component {
     componentDidMount() {
 
         Axios.get('/proposals').then(results => {
-            results.data.map(function(propalResult, i) {
+            results.data.map((propalResult, i) => {
                 var propal = new Propal();
                 propal.bindPropal(propalResult);
                 Axios.get('/thirdparties/' + propal.socid).then(result => {

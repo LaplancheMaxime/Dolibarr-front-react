@@ -20,7 +20,7 @@ class MainSideBarComponent extends React.Component {
 
         Axios.get('/proposals').then(results => {
             console.log('results', results);
-            results.data.map(function(propalResult, i) {
+            results.data.map((propalResult, i)  => {
                 if (propalResult.statut ===1 ) {
                     this.openPropalNumber++;
                     this.setState({openPropalNumber: this.openPropalNumber});
