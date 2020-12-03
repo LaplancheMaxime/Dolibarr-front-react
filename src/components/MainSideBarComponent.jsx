@@ -48,7 +48,7 @@ class MainSideBarComponent extends React.Component {
 
                 <a href="/" className="brand-link">
                 <img src={window._env_.REACT_APP_SITE_LOGO_URL_MINI} alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{"opacity": ".8"}}/>
-                <span className="brand-text font-weight-light">{window._ENV_.REACT_APP_SITE_NAME}</span>
+                <span className="brand-text font-weight-light">{window._env_.REACT_APP_SITE_NAME}</span>
                 </a>
 
                 <div className="sidebar">
