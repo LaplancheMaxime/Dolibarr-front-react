@@ -20,9 +20,6 @@ export class ViewAllPropalsComponent extends React.Component {
 
         this.state = {
             Propals : [],
-            nbPropals: 0,
-            ReadyToGo: false,
-            noData: false,
         }
 
         function dateFormatter(cell, row) {
@@ -110,11 +107,10 @@ export class ViewAllPropalsComponent extends React.Component {
                         
                     });
                 }
+
+                return true;
             });
         },error => {
-            if ((error.response && error.response.status === 404) || error.status === 404) {
-                this.setState({noData: true});
-            }
         });
     }
 
@@ -128,14 +124,14 @@ export class ViewAllPropalsComponent extends React.Component {
                 <section className="content-header">
                     <div className="container-fluid">
                         <div className="row mb-2">
-                        <div className="col-sm-6">
-                            <h1>Mes propositions comerciales</h1>
-                        </div>
-                        <div className="col-sm-6">
-                            <ol className="breadcrumb float-sm-right">
-                                <li className="breadcrumb-item active">Mes propositions com.</li>
-                            </ol>
-                        </div>
+                            <div className="col-sm-6">
+                                <h1>Mes propositions comerciales</h1>
+                            </div>
+                            <div className="col-sm-6">
+                                <ol className="breadcrumb float-sm-right">
+                                    <li className="breadcrumb-item active">Mes propositions com.</li>
+                                </ol>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -143,8 +139,8 @@ export class ViewAllPropalsComponent extends React.Component {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12">
-                                <div className="card card-solid">
-                                    <div className="card-body pb-0">
+                                <div className="card">
+                                    <div className="card-body">
                                         <ToolkitProvider 
                                             keyField="id" 
                                             data={this.state.Propals} 
@@ -156,10 +152,10 @@ export class ViewAllPropalsComponent extends React.Component {
                                                 props => (
                                                     <div>
                                                         <div className="row">
-                                                            <div className="col-lg-10">
-                                                                <SearchBar { ...props.searchProps } placeholder="Recherche..." />
+                                                            <div className="col-lg-2">
+                                                                <SearchBar { ...props.searchProps } placeholder="Recherche..." className="form-control" />
                                                             </div>
-                                                            <div className="col-sm-2">
+                                                            <div className="col-sm-1">
                                                                 <ClearSearchButton { ...props.searchProps } className="btn btn-block" text="Effacer"/>
                                                             </div>
                                                         </div>
@@ -176,46 +172,6 @@ export class ViewAllPropalsComponent extends React.Component {
                                                 )
                                             }
                                         </ToolkitProvider>
-                                        {/* {this.state.noData ?
-                                            <p className="text-center">Aucune proposition commerciale pour le moment</p>
-                                        :
-                                            <table ref={this.tableRef} className="table table-striped table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Ref.</th>
-                                                        <th>Ref. client</th>
-                                                        <th>Tiers</th>
-                                                        <th>Date</th>
-                                                        <th>Montant</th>
-                                                        <th>État</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    {this.state.Propals.map(function(propal) {
-                                                        if (propal.statut !== 0) {
-                                                            return <tr key={propal.id } onClick={()=>{this.props.history.push('/propals/'+propal.id)}} style={{cursor: 'pointer'}}>
-                                                                    <td>{propal.ref}</td>
-                                                                    <td>{propal.ref_client}</td>
-                                                                    <td>{propal.third_party?.name}</td>
-                                                                    <td><Moment unix>{propal.date_validation}</Moment></td>
-                                                                    <td>{Number(propal.total_ttc)}€</td>
-                                                                    <td>
-                                                                        {propal.statut === 1 ?
-                                                                            <span className="right badge badge-success">{propal.statut_libelle}</span>
-                                                                            :
-                                                                            <span className="right badge badge-primary">{propal.statut_libelle}</span>
-                                                                        }
-                                                                    </td>
-                                                                </tr>
-                                                        } else {
-                                                            return true
-                                                        }
-                                                    })}
-                                                </tbody>
-
-                                            </table>
-                                        } */}
                                     </div>
                                 </div>
                             </div>
