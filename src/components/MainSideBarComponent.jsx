@@ -1,7 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import { AuthContext } from "../context/Auth";
-import { withRouter } from "react-router-dom";
+import { withRouter, NavLink  } from "react-router-dom";
 import { config } from "../constants"
 
 class MainSideBarComponent extends React.Component {
@@ -19,8 +19,7 @@ class MainSideBarComponent extends React.Component {
     componentDidMount() {
 
         Axios.get('/proposals').then(results => {
-            console.log('results', results);
-            results.data.map(function(propalResult, i) {
+            results.data.map((propalResult, i)  => {
                 if (propalResult.statut ===1 ) {
                     this.openPropalNumber++;
                     this.setState({openPropalNumber: this.openPropalNumber});
@@ -48,17 +47,16 @@ class MainSideBarComponent extends React.Component {
                     <nav className="mt-2">
                         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li className="nav-item has-treeview">
-                                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                <a href="#" onClick={() => this.props.history.push("/dashboard")} className="nav-link">
-                                <i className="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Dashboard
-                                </p>
-                                </a>
+                                <NavLink to="/dashboard" activeClassName="active" className="nav-link">
+                                    <i className="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Dashboard
+                                    </p>
+                                </NavLink>
                             </li>
                             <li className="nav-item">
                                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                <a href="#" onClick={() => this.props.history.push("/propals")} className="nav-link">
+                                <NavLink to="/propals" activeClassName="active" className="nav-link">
                                     <i className="nav-icon fas fa-money-check-alt"></i>
                                     <p>
                                         Proposition com.
@@ -67,7 +65,7 @@ class MainSideBarComponent extends React.Component {
                                         }
                                         
                                     </p>
-                                </a>
+                                </NavLink>
                             </li>
                             <li className="nav-item has-treeview">
                                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}

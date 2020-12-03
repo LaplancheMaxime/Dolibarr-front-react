@@ -54,7 +54,7 @@ function App() {
   }, (error) => {
     console.log('error', error);
     console.log('error.response', error.response);
-    if (401 === error.status) {
+    if (401 === error.response.status) {
       setToken("");
       // window.location = '/login';
     }
