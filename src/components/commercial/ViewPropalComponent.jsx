@@ -7,6 +7,7 @@ import { ThirdParty } from "../../models/ThirdParty";
 import { Redirect } from "react-router-dom";
 import { User } from "../../models/User";
 import { AuthContext } from "../../context/Auth";
+import NotificationManager from 'react-notifications/lib/NotificationManager';
 
 export class ViewPropalComponent extends React.Component {
 
@@ -15,6 +16,8 @@ export class ViewPropalComponent extends React.Component {
 
         this.MyCompagny = null;
         this.Propal = null;
+
+        this.validatePropal = this.validatePropal.bind(this);
 
         this.state = {
             MyCompagny : null,
@@ -66,7 +69,12 @@ export class ViewPropalComponent extends React.Component {
 
         Axios.post('/proposals/' + this.state.Propal.id + '/close', proposalsCloseModel).then(result => {
             console.log('result', result);
-            window.location.reload(true);
+            this.componentDidMount();
+            if (i_status === 2 ) {
+                NotificationManager.success("Votre approbation pour ce devis est bien prise en compte!", "Devis accepté !",7000)
+            } else if (i_status === 3) {
+                NotificationManager.warning("Vous n'avez pas approuvé ce devis, nous allons vous recontacter rapidement.", "Devis refusé", 7000,);
+            }
         })
     }
     
@@ -108,10 +116,10 @@ export class ViewPropalComponent extends React.Component {
                                                 <p>Cette proposition commerciale est en attente de validation de votre part.</p>
                                                 <div className="row">
                                                     <div className='col-7'>
-                                                        <button type="button" className="btn btn-block bg-gradient-success" onClick={() => {this.validatePropal(2)}}><i className="far fa-check-circle"></i> Accepter</button>
+                                                        <button type="button" className="btn btn-block bg-gradient-success" onClick={() => this.validatePropal(2)}><i className="far fa-check-circle"></i> Accepter</button>
                                                     </div>
                                                     <div className='col-5'>
-                                                        <button type="button" className="btn btn-block bg-gradient-danger"><i className="far fa-times-circle"></i> Refuser</button>
+                                                        <button type="button" className="btn btn-block bg-gradient-danger" onClick={() => this.validatePropal(3)}><i className="far fa-times-circle"></i> Refuser</button>
                                                     </div>
                                                 </div>
                                             </div>
