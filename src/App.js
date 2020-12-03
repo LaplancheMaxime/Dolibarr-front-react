@@ -67,6 +67,8 @@ function App() {
     "DOLAPIKEY": authTokens
   };
 
+  document.title = window._env_.REACT_APP_SITE_NAME + " - Votre espace client personalisé !"
+
 
   return (
     <AuthContext.Provider value={{ existingTokens, setAuthTokens: setToken, user, setUser: setupUser}}>
