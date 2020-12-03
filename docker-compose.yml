@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
       args:
-        REACT_APP_SITE_LOGO_URL_MINI: "https://dolibarr.mltech.fr/viewimage.php?modulepart=mycompany&file=logos%2Fthumbs%2FLogo_mini.png"
+        REACT_APP_SITE_LOGO_URL_MINI: "/dist/img/LogoMLTech_bg_white.png"
         REACT_APP_SITE_LOGO_URL: /dist/img/LogoMLTech.png
         REACT_APP_SITE_NAME: MLTech
         REACT_APP_MAIL_CONTACT: contact@mltech.fr
@@ -19,7 +19,6 @@ services:
         REACT_APP_USER_CONTACT: "${REACT_APP_USER_CONTACT}"
     environment:
       VIRTUAL_HOST: my.mltech.fr
-      #LETSENCRYPT_HOST: my.mltech.fr
       NODE_ENV: production
     networks: 
       - internal
