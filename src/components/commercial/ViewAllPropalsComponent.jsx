@@ -125,11 +125,11 @@ export class ViewAllPropalsComponent extends React.Component {
                     <div className="container-fluid">
                         <div className="row mb-2">
                             <div className="col-sm-6">
-                                <h1>Mes propositions comerciales</h1>
+                                <h1>Mes devis</h1>
                             </div>
                             <div className="col-sm-6">
                                 <ol className="breadcrumb float-sm-right">
-                                    <li className="breadcrumb-item active">Mes propositions com.</li>
+                                    <li className="breadcrumb-item active">Mes devis.</li>
                                 </ol>
                             </div>
                         </div>
@@ -160,7 +160,7 @@ export class ViewAllPropalsComponent extends React.Component {
                                                             </div>
                                                         </div>
                                                         <BootstrapTable
-                                                                        noDataIndication="Aucune proposition commerciale pour le moment" 
+                                                                        noDataIndication="Aucun devis pour le moment" 
                                                                         defaultSorted={this.defaultSorted}
                                                                         rowEvents={this.rowEvents}
                                                                         striped={true} 

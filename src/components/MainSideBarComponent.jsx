@@ -58,7 +58,7 @@ class MainSideBarComponent extends React.Component {
                                 <NavLink to="/dashboard" activeClassName="active" className="nav-link">
                                     <i className="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
-                                        Dashboard
+                                        Accueil
                                     </p>
                                 </NavLink>
                             </li>
@@ -66,7 +66,7 @@ class MainSideBarComponent extends React.Component {
                                 <NavLink to="/propals" activeClassName="active" className="nav-link">
                                     <i className="nav-icon fas fa-money-check-alt"></i>
                                     <p>
-                                        Proposition com.
+                                        Mes devis
                                         {this.state.openPropalNumber > 0 ?
                                             <span className="right badge badge-success">NEW<i className="fas fa-pen-alt"></i></span>
                                             :
@@ -91,7 +91,7 @@ class MainSideBarComponent extends React.Component {
                                 <a href="#" className="nav-link">
                                     <i className="nav-icon fas fa-file-invoice-dollar"></i>
                                     <p>
-                                        Mes facture
+                                        Mes factures
                                         <span className="badge badge-primary right">0</span>
                                     </p>
                                 </a>

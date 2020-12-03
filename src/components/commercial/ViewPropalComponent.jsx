@@ -4,7 +4,7 @@ import InvoiceTemplateComponent from "../template/InvoiceTemplateComponent";
 import { Compagny } from "../../models/Compagny";
 import { Propal } from "../../models/commercial/Propal";
 import { ThirdParty } from "../../models/ThirdParty";
-import { Redirect } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { User } from "../../models/User";
 import { AuthContext } from "../../context/Auth";
 import NotificationManager from 'react-notifications/lib/NotificationManager';
@@ -88,12 +88,11 @@ export class ViewPropalComponent extends React.Component {
                     <div className="container-fluid">
                         <div className="row mb-2">
                         <div className="col-sm-6">
-                            <h1>Proposition commerciale</h1>
+                            <h1>Devis</h1>
                         </div>
                         <div className="col-sm-6">
                             <ol className="breadcrumb float-sm-right">
-                                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                <li className="breadcrumb-item"><a href="#" onClick={()=>{this.props.history.push('/propals')}} >Mes propositions com.</a></li>
+                                <li className="breadcrumb-item"><NavLink to='/propals' >Mes devis</NavLink></li>
                                 <li className="breadcrumb-item active">{this.state.Propal?.ref}</li>
                             </ol>
                         </div>
@@ -113,7 +112,7 @@ export class ViewPropalComponent extends React.Component {
                                             <div className="card-body">
                                                 <h2 className="text-center">{Number(this.state.Propal.total_ttc).toFixed(2)}€</h2>
                                                 <hr/>
-                                                <p>Cette proposition commerciale est en attente de validation de votre part.</p>
+                                                <p>Ce devis est en attente de validation de votre part.</p>
                                                 <div className="row">
                                                     <div className='col-7'>
                                                         <button type="button" className="btn btn-block bg-gradient-success" onClick={() => this.validatePropal(2)}><i className="far fa-check-circle"></i> Accepter</button>
