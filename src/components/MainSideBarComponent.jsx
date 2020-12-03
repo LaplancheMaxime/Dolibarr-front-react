@@ -10,19 +10,24 @@ class MainSideBarComponent extends React.Component {
         super(props);
 
         this.openPropalNumber = 0;
+        this.nbPropals = 0; 
 
         this.state = {
             openPropalNumber : this.openPropalNumber,
+            nbPropals: this.nbPropals
         }
     }
 
-    componentDidMount() {
-
+    loadNumbers() {
         Axios.get('/proposals').then(results => {
             results.data.map((propalResult, i)  => {
-                if (propalResult.statut ===1 ) {
+                if (propalResult.statut === 1 ) {
                     this.openPropalNumber++;
                     this.setState({openPropalNumber: this.openPropalNumber});
+                } else if (propalResult.statut !== 0 ) {
+                    this.nbPropals++;
+                    console.log(this.nbPropals);
+                    this.setState({nbPropals: this.nbPropals});
                 }
                 return true;
             });
@@ -33,6 +38,10 @@ class MainSideBarComponent extends React.Component {
         });
     }
 
+    componentDidMount() {
+
+        this.loadNumbers();
+    }
 
     render() {
         return (
@@ -60,8 +69,10 @@ class MainSideBarComponent extends React.Component {
                                     <i className="nav-icon fas fa-money-check-alt"></i>
                                     <p>
                                         Proposition com.
-                                        {this.state.openPropalNumber > 0 &&
-                                            <span className="right badge badge-success">NEW</span>
+                                        {this.state.openPropalNumber > 0 ?
+                                            <span className="right badge badge-success">NEW<i className="fas fa-pen-alt"></i></span>
+                                            :
+                                            <span className="badge badge-primary right">{this.state.nbPropals}</span>
                                         }
                                         
                                     </p>
