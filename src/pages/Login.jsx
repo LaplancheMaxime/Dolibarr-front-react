@@ -4,7 +4,6 @@ import "../App.css";
 import Axios from "axios";
 import { AuthContext } from "../context/Auth";
 import { User } from "../models/User";
-import {config } from "../constants"
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import NotificationManager from 'react-notifications/lib/NotificationManager';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
@@ -137,7 +136,7 @@ class Login extends React.Component {
         <div className="login-box">
           <div className="login-logo">
             <a href="/">
-              <img src={config.common.SITE_LOGO_URL} alt="Website logo" style={{width: '250px'}}/><br />
+              <img src={window._env_.REACT_APP_SITE_LOGO_URL} alt="Website logo" style={{width: '250px'}}/><br />
               <h4>Votre espace client personalisé !</h4>
             </a>
           </div>

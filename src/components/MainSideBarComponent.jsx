@@ -2,7 +2,6 @@ import React from "react";
 import Axios from "axios";
 import { AuthContext } from "../context/Auth";
 import { withRouter, NavLink  } from "react-router-dom";
-import { config } from "../constants"
 
 class MainSideBarComponent extends React.Component {
 
@@ -48,8 +47,8 @@ class MainSideBarComponent extends React.Component {
             <aside className="main-sidebar sidebar-dark-primary elevation-4">
 
                 <a href="/" className="brand-link">
-                <img src={config.common.SITE_LOGO_URL_MINI} alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{"opacity": ".8"}}/>
-                <span className="brand-text font-weight-light">{config.common.SITE_NAME}</span>
+                <img src={window._env_.REACT_APP_SITE_LOGO_URL_MINI} alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{"opacity": ".8"}}/>
+                <span className="brand-text font-weight-light">{window._env_.REACT_APP_SITE_NAME}</span>
                 </a>
 
                 <div className="sidebar">
@@ -59,16 +58,15 @@ class MainSideBarComponent extends React.Component {
                                 <NavLink to="/dashboard" activeClassName="active" className="nav-link">
                                     <i className="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
-                                        Dashboard
+                                        Accueil
                                     </p>
                                 </NavLink>
                             </li>
                             <li className="nav-item">
-                                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                 <NavLink to="/propals" activeClassName="active" className="nav-link">
                                     <i className="nav-icon fas fa-money-check-alt"></i>
                                     <p>
-                                        Proposition com.
+                                        Mes devis
                                         {this.state.openPropalNumber > 0 ?
                                             <span className="right badge badge-success">NEW<i className="fas fa-pen-alt"></i></span>
                                             :
@@ -80,20 +78,20 @@ class MainSideBarComponent extends React.Component {
                             </li>
                             <li className="nav-item has-treeview">
                                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                <a href="#" className="nav-link">
+                                <a href="#" className="nav-link disabled">
                                     <i className="nav-icon fas fa-dolly"></i>
                                     <p>
                                         Mes commandes
-                                        <span className="badge badge-primary right">1</span>
+                                        <span className="badge badge-primary right">0</span>
                                     </p>
                                 </a>
                             </li>
                             <li className="nav-item has-treeview">
                                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                <a href="#" className="nav-link">
+                                <a href="#" className="nav-link disabled">
                                     <i className="nav-icon fas fa-file-invoice-dollar"></i>
                                     <p>
-                                        Mes facture
+                                        Mes factures
                                         <span className="badge badge-primary right">0</span>
                                     </p>
                                 </a>
