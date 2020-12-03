@@ -21,9 +21,9 @@ services:
       REACT_APP_USER_CONTACT: 1
     networks: 
       - internal
-      # - nginx-proxy
+      - nginx-proxy
 
 networks: 
   internal:
-  # nginx-proxy:
-  #   external: true
+  nginx-proxy:
+    external: true
