@@ -78,17 +78,17 @@ class MainSideBarComponent extends React.Component {
                             </li>
                             <li className="nav-item has-treeview">
                                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                <a href="#" className="nav-link">
+                                <a href="#" className="nav-link disabled">
                                     <i className="nav-icon fas fa-dolly"></i>
                                     <p>
                                         Mes commandes
-                                        <span className="badge badge-primary right">1</span>
+                                        <span className="badge badge-primary right">0</span>
                                     </p>
                                 </a>
                             </li>
                             <li className="nav-item has-treeview">
                                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                <a href="#" className="nav-link">
+                                <a href="#" className="nav-link disabled">
                                     <i className="nav-icon fas fa-file-invoice-dollar"></i>
                                     <p>
                                         Mes factures
