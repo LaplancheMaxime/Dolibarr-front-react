@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, NavLink  } from "react-router-dom";
 import {AuthContext} from "../context/Auth";
 import { config } from "../constants";
 
@@ -14,11 +14,14 @@ class NavBarComponent extends React.Component {
       <nav className="main-header navbar navbar-expand navbar-white navbar-light">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" data-widget="pushmenu" href="/admin" role="button"><i className="fas fa-bars"></i></a>
+            <a className="nav-link" data-widget="pushmenu" href="/" role="button"><i className="fas fa-bars"></i></a>
           </li>
           <li className="nav-item d-none d-sm-inline-block">
              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a href="#" onClick={() => this.props.history.push("/")} className="nav-link">Accueil</a>
+            <NavLink to="/dashboard" activeClassName="active" className="nav-link">
+              Accueil
+            </NavLink>
+            {/* <a href="#" onClick={() => this.props.history.push("/")} className=""></a> */}
           </li>
           <li className="nav-item d-none d-sm-inline-block">
             <a href={'mailto:' + config.common.MAIL_CONTACT} className="nav-link">Contact</a>
