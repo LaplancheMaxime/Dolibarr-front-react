@@ -11,7 +11,7 @@ import Moment from 'react-moment';
 import Axios from "axios";
 import ViewAllPropalsComponent from "./components/commercial/ViewAllPropalsComponent";
 import DashboardComponent from "./components/DashboardComponent";
-import { config } from "./constants";
+// import { config } from "./constants";
 import {NotificationContainer} from 'react-notifications';
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
     return Promise.reject(error);
   });
 
-  Axios.defaults.baseURL = config.url.API_URL
+  Axios.defaults.baseURL = window._env_.REACT_APP_API_ADDRESS
 
   Axios.defaults.headers = { 
     "DOLAPIKEY": authTokens

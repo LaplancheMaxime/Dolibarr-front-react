@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter, NavLink  } from "react-router-dom";
 import {AuthContext} from "../context/Auth";
-import { config } from "../constants";
 
 class NavBarComponent extends React.Component {
 
@@ -22,7 +21,7 @@ class NavBarComponent extends React.Component {
             </NavLink>
           </li>
           <li className="nav-item d-none d-sm-inline-block">
-            <a href={'mailto:' + config.common.MAIL_CONTACT} className="nav-link">Contact</a>
+            <a href={'mailto:' + window._env_.REACT_APP_MAIL_CONTACT} className="nav-link">Contact</a>
           </li>
         </ul>
         <ul className="navbar-nav ml-auto">
@@ -34,7 +33,7 @@ class NavBarComponent extends React.Component {
             </a>
             <ul className="dropdown-menu dropdown-menu-lg dropdown-menu-right" style={{"left": "inherit", "right": "0px"}}>
               <li className="user-header bg-primary align-middle ">
-                <img className="img-circle" src={config.url.DOLIBARR_INSTANCE + "public/theme/common/user_man.png"} alt="User"/>
+                <img className="img-circle" src={window._env_.REACT_APP_DOLIBARR_INSTANCE + "public/theme/common/user_man.png"} alt="User"/>
                 <br />
                 <div className="text-center">
                   <b>{this.context.user?.firstname} {this.context.user?.lastname}</b> <br />
