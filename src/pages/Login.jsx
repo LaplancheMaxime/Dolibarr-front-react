@@ -135,7 +135,7 @@ class Login extends React.Component {
       <div className="login-page" style={{ minHeight: 512.8 }}>
         <div className="login-box">
           <div className="login-logo">
-            <a href="/">
+            <a href="https://mltech.fr/">
               <img src={window._env_.REACT_APP_SITE_LOGO_URL} alt="Website logo" style={{width: '250px'}}/><br />
               <h4>Votre espace client personalisé !</h4>
             </a>
