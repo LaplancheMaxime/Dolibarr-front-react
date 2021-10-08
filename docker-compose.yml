@@ -27,8 +27,6 @@ services:
       - internal
       - traefik_traefik
 
-  front-proxy:
-
 networks: 
   internal:
   traefik_traefik:
