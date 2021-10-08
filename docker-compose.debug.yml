@@ -12,8 +12,8 @@ services:
       REACT_APP_SITE_LOGO_URL: /dist/img/LogoMLTech.png
       REACT_APP_SITE_NAME: MLTech
       REACT_APP_MAIL_CONTACT: contact@mltech.fr
-      REACT_APP_API_ADDRESS: http://localhost:8083/api/index.php
-      REACT_APP_DOLIBARR_INSTANCE: https://localhost:8083/
+      REACT_APP_API_ADDRESS: http://localhost:5001/api/index.php
+      REACT_APP_DOLIBARR_INSTANCE: http://localhost:5001
       REACT_APP_USER_CONTACT: 1
     ports:
       - 3002:3000
