@@ -47,7 +47,7 @@ dockerfile:deploy:hub:
   before_script:
     - docker login -u "$CI_DOCKER_HUB_USER" -p "$CI_DOCKER_HUB_PASSWORD" $CI_DOCKER_HUB_URL_REGISTRY
   script:
-    - export VERSION=$(node -p "require('./package.json').version")
+    - export VERSION=$(docker run --rm -v "$PWD":/app:ro -w /app node:slim node -p "require('./package.json').version")
     - echo $VERSION
     - docker build --pull -t "$CI_DOCKER_HUB_REGISTRY_IMAGE" .
     - docker push $CI_DOCKER_HUB_REGISTRY_IMAGE
