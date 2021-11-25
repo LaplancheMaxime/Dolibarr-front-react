@@ -39,6 +39,17 @@ sonarcloud-check:
     - merge_requests
     - master
 
+dockerfile:deploy:hub:
+  stage: build
+  image: docker:latest
+  service:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_DOCKER_HUB_USER" -p "$CI_DOCKER_HUB_PASSWORD" $CI_DOCKER_HUB_URL_REGISTRY
+  script:
+    - docker build --pull -t "$CI_DOCKER_HUB_REGISTRY_IMAGE" .
+    - docker push $CI_DOCKER_HUB_URL_REGISTRY
+
 docker:deploy:
   stage: deploy_server
   image: registry.gitlab.com/mlaplanche/gestionformation-sdis14/docker-compose:19.03.11
