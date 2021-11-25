@@ -9,7 +9,7 @@ services:
       dockerfile: ./Dockerfile
     environment:
       NODE_ENV: production
-      NODE_OPTIONS: ""
+      NODE_OPTIONS: " "
       REACT_APP_SITE_LOGO_URL_MINI: "/dist/img/LogoMLTech_bg_white.png"
       REACT_APP_SITE_LOGO_URL: /dist/img/LogoMLTech.png
       REACT_APP_SITE_NAME: MLTech
