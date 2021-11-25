@@ -21,7 +21,7 @@ class NavBarComponent extends React.Component {
             </NavLink>
           </li>
           <li className="nav-item d-none d-sm-inline-block">
-            <a href={'mailto:' + window._env_.REACT_APP_MAIL_CONTACT} className="nav-link">Contact</a>
+            <a href={'mailto:' + process.env.REACT_APP_MAIL_CONTACT} className="nav-link">Contact</a>
           </li>
         </ul>
         <ul className="navbar-nav ml-auto">
@@ -33,7 +33,7 @@ class NavBarComponent extends React.Component {
             </a>
             <ul className="dropdown-menu dropdown-menu-lg dropdown-menu-right" style={{"left": "inherit", "right": "0px"}}>
               <li className="user-header bg-primary align-middle ">
-                <img className="img-circle" src={window._env_.REACT_APP_DOLIBARR_INSTANCE + "public/theme/common/user_man.png"} alt="User"/>
+                <img className="img-circle" src={process.env.REACT_APP_DOLIBARR_INSTANCE + "public/theme/common/user_man.png"} alt="User"/>
                 <br />
                 <div className="text-center">
                   <b>{this.context.user?.firstname} {this.context.user?.lastname}</b> <br />
@@ -42,7 +42,7 @@ class NavBarComponent extends React.Component {
               </li>
               <div className="user-footer">
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a href="#" onClick={() => this.logOut()} className="btn btn-default btn-flat btn-block">Sign out</a>
+                <button onClick={() => this.logOut()} className="btn btn-default btn-flat btn-block">Se déconnecter</button>
               </div>
             </ul>
           </li>

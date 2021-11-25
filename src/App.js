@@ -56,18 +56,18 @@ function App() {
     console.log('error.response', error.response);
     if (401 === error.response.status) {
       setToken("");
-      // window.location = '/login';
+
     }
     return Promise.reject(error);
   });
 
-  Axios.defaults.baseURL = window._env_.REACT_APP_API_ADDRESS
+  Axios.defaults.baseURL = process.env.REACT_APP_API_ADDRESS
 
   Axios.defaults.headers = { 
     "DOLAPIKEY": authTokens
   };
 
-  document.title = window._env_.REACT_APP_SITE_NAME + " - Votre espace client personalisé !"
+  document.title = process.env.REACT_APP_SITE_NAME + " - Votre espace client personalisé !"
 
 
   return (
