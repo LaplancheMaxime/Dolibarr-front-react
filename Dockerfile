@@ -5,13 +5,12 @@ WORKDIR /app
 
 ENV PATH /app/node_modules/.bin:$PATH
 ENV NODE_ENV=production
+ENV NODE_OPTIONS=--openssl-legacy-provider 
 
 COPY package.json ./
 COPY package-lock.json ./
 RUN npm i
 COPY . ./
-RUN export NODE_OPTIONS=--openssl-legacy-provider && yarn build && yarn install --production --ignore-scripts --prefer-offline
-
 RUN npm run build
 
 # production environment
