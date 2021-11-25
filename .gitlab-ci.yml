@@ -50,7 +50,7 @@ dockerfile:deploy:hub:develop:
     - docker build --pull -t "$CI_DOCKER_HUB_REGISTRY_IMAGE:develop" .
     - docker push -a $CI_DOCKER_HUB_REGISTRY_IMAGE
   only:
-    - master
+    - develop
 
 dockerfile:deploy:hub:master:
   stage: build
