@@ -2,6 +2,7 @@
 FROM node:alpine as build
 WORKDIR /app
 
+RUN export NODE_OPTIONS=--openssl-legacy-provider && yarn build && yarn install --production --ignore-scripts --prefer-offline
 ENV PATH /app/node_modules/.bin:$PATH
 ENV NODE_ENV=production
 
