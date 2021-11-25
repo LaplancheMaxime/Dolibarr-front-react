@@ -48,7 +48,7 @@ dockerfile:deploy:hub:
     - docker login -u "$CI_DOCKER_HUB_USER" -p "$CI_DOCKER_HUB_PASSWORD" $CI_DOCKER_HUB_URL_REGISTRY
   script:
     - docker build --pull -t "$CI_DOCKER_HUB_REGISTRY_IMAGE" .
-    - docker push $CI_DOCKER_HUB_URL_REGISTRY
+    - docker push $CI_DOCKER_HUB_REGISTRY_IMAGE
 
 docker:deploy:
   stage: deploy_server
