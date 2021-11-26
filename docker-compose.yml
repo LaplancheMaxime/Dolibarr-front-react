@@ -2,11 +2,8 @@ version: '3.7'
 
 services:
   app:
-    image: dolibarr-front-react
+    image: maximelaplanche/customerarea4dolibarr:latest
     restart: always
-    build:
-      context: .
-      dockerfile: ./Dockerfile
     environment:
       NODE_ENV: production
       NODE_OPTIONS: " "
