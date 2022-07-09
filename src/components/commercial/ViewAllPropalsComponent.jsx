@@ -4,9 +4,8 @@ import Moment from "react-moment";
 import { AuthContext } from "../../context/Auth";
 import { Propal } from "../../models/commercial/Propal";
 import { ThirdParty } from "../../models/ThirdParty";
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
-import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
+import DataTable from 'react-data-table-component';
+
 
 const $ = require('jquery');
 $.DataTable = require('datatables.net');
@@ -22,11 +21,11 @@ export class ViewAllPropalsComponent extends React.Component {
             Propals : [],
         }
 
-        function dateFormatter(cell, row) {
+        function dateFormatter(cell) {
             return (<Moment unix>{cell}</Moment>);
         }
 
-        function priceFormatter(cell, row) {
+        function priceFormatter(cell) {
             return (<span>{Number(cell)}€</span>)
         }
 
@@ -34,45 +33,45 @@ export class ViewAllPropalsComponent extends React.Component {
             console.log(cell, row)
             return (
                 cell === 1 ?
-                    <span className="right badge badge-success">{row.statut_libelle}</span>
+                    <h5><span className="right badge badge-success">{row.statut_libelle}</span></h5>
                     :
-                    <span className="right badge badge-primary">{row.statut_libelle}</span>
+                    <h5><span className="right badge-lg badge badge-primary">{row.statut_libelle}</span></h5>
             )
         }
 
         this.tableColumns = [
             {
-                dataField: 'ref',
-                text: "Ref.",
-                sort: true,
+                selector: row => row.ref,
+                name: "Ref.",
+                sortable: true,
             },
             {
-                dataField: 'ref_client',
-                text: "Ref. client",
-                sort: false
+                selector: row => row.ref_client,
+                name: "Ref. client",
+                sortable: false
             },
             {
-                dataField: 'third_party.name',
-                text: "Tiers",
-                sort: false
+                selector: row => row.third_party.name,
+                name: "Tiers",
+                sortable: false
             },
             {
-                dataField: 'date_validation',
-                text: "Date",
-                sort: true,
-                formatter:dateFormatter,
+                selector: row => row.date_validation,
+                name: "Date",
+                sortable: true,
+                format: (row, index) => dateFormatter(row.date_validation),
             },
             {
-                dataField: 'total_ttc',
-                text: "Montant",
-                sort: false,
-                formatter: priceFormatter,
+                selector: row => row.total_ttc,
+                name: "Montant",
+                sortable: false,
+                format: (row, index) => priceFormatter(row.total_ttc),
             },
             {
-                dataField: 'statut',
-                text: "État",
-                sort: true,
-                formatter: statutFormatter
+                selector: row => row.statut,
+                name: "État",
+                sortable: true,
+                format: (row, index) => statutFormatter(row.statut, row)
             }
         ];
 
@@ -81,18 +80,18 @@ export class ViewAllPropalsComponent extends React.Component {
             order: 'asc'
         }];
 
-        this.rowEvents = {
-            onClick: (e, row, rowIndex) => {
-                console.log(e, row, rowIndex);
+        this.rowEvents = (row, rowIndex) => {
+                console.log(row, rowIndex);
                 this.props.history.push('/propals/'+ row.id);
-            }
         }
     }
 
     componentDidMount() {
 
         Axios.get('/proposals').then(results => {
-            results.data.map((propalResult, i) => {
+            let count = results.data.length ? results.data.length : 0;
+            let i = 0; 
+            results.data.map((propalResult) => {
                 var propal = new Propal();
                 propal.bindPropal(propalResult);
 
@@ -103,7 +102,11 @@ export class ViewAllPropalsComponent extends React.Component {
                         third_party.bindThirdParty(result.data);
                         propal.third_party = third_party;
                         this.Propals.push(propal);
-                        this.setState({Propals: this.Propals});
+                        i++
+                        if (i === count) {
+                            this.setState({Propals: this.Propals});
+                        }
+                        
                         
                     });
                 }
@@ -118,7 +121,6 @@ export class ViewAllPropalsComponent extends React.Component {
      }
 
     render() {
-        const { SearchBar, ClearSearchButton } = Search;
         return(
             <div>
                 <section className="content-header">
@@ -141,37 +143,17 @@ export class ViewAllPropalsComponent extends React.Component {
                             <div className="col-12">
                                 <div className="card">
                                     <div className="card-body">
-                                        <ToolkitProvider 
-                                            keyField="id" 
-                                            data={this.state.Propals} 
-                                            columns={this.tableColumns} 
-                                            bootstrap4={true}
-                                            search
-                                        >
-                                            {
-                                                props => (
-                                                    <div>
-                                                        <div className="row">
-                                                            <div className="col-lg-2">
-                                                                <SearchBar { ...props.searchProps } placeholder="Recherche..." className="form-control" />
-                                                            </div>
-                                                            <div className="col-sm-1">
-                                                                <ClearSearchButton { ...props.searchProps } className="btn btn-block" text="Effacer"/>
-                                                            </div>
-                                                        </div>
-                                                        <BootstrapTable
-                                                                        noDataIndication="Aucun devis pour le moment" 
-                                                                        defaultSorted={this.defaultSorted}
-                                                                        rowEvents={this.rowEvents}
-                                                                        striped={true} 
-                                                                        bootstrap4={true}
-                                                                        hover={true}
-                                                                        pagination={ paginationFactory() }
-                                                                        { ...props.baseProps } />
-                                                    </div>
-                                                )
-                                            }
-                                        </ToolkitProvider>
+                                        <DataTable
+                                            columns={this.tableColumns}
+                                            data={this.state.Propals}
+                                            persistTableHead={true}
+                                            pointerOnHover
+                                            striped
+                                            highlightOnHover
+                                            onRowClicked={this.rowEvents}
+                                            defaultSortFieldId={1}
+                                            pagination
+                                        />
                                     </div>
                                 </div>
                             </div>

@@ -11,25 +11,15 @@ class InvoiceTemplateComponent extends React.Component {
               <div className="row">
                 <div className="col-12">
                   <h4>
-                    <i className="fas fa-globe"></i> {this.props.MyCompagny.name}
+                    <i className="fas fa-globe"></i> {process.env.REACT_APP_SITE_NAME}
                     <small className="float-right">Date: <Moment unix>{this.props.Invoice.date_validation}</Moment></small><br/>
                     <small className="float-right"><span className="right badge badge-primary">{this.props.Invoice.statut_libelle}</span></small>
                   </h4>
                 </div>
               </div>
               <div className="row invoice-info">
-                <div className="col-sm-4 invoice-col">
-                  De
-                  <address>
-                    <strong>{this.props.MyCompagny.name}</strong><br/>
-                    {this.props.MyCompagny.address}<br/>
-                    {this.props.MyCompagny.zip}, {this.props.MyCompagny.town}<br/>
-                    Phone: {this.props.MyCompagny.phone}<br/>
-                    Email: {this.props.MyCompagny.email}
-                  </address>
-                </div>
-                <div className="col-sm-4 invoice-col">
-                  À
+                <div className="col-sm-8 invoice-col">
+                  Pour
                   <address>
                     <strong>
                     {this.props.Invoice.third_party.name_alias !== "" ?
@@ -40,7 +30,7 @@ class InvoiceTemplateComponent extends React.Component {
                     </strong><br/>
                     {this.props.Invoice.third_party.address}<br/>
                     {this.props.Invoice.third_party.zip}, {this.props.Invoice.third_party.town}<br/>
-                    Phone: {this.props.Invoice.third_party.phone} <br/>
+                    Téléphone: {this.props.Invoice.third_party.phone} <br/>
                     Email: {this.props.Invoice.third_party.email}
                   </address>
                 </div>
@@ -117,12 +107,6 @@ class InvoiceTemplateComponent extends React.Component {
                   <img src="../../dist/img/credit/mastercard.png" alt="Mastercard"/>
                   <img src="../../dist/img/credit/american-express.png" alt="American Express"/>
                   <img src="../../dist/img/credit/paypal2.png" alt="Paypal"/>
-
-                  {/* <p className="text-muted well well-sm shadow-none" style={{"marginTop": "10px"}}>
-                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                    plugg
-                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                  </p> */}
                 </div>
                 <div className="col-6">
                   <div className="table-responsive">
@@ -151,6 +135,7 @@ class InvoiceTemplateComponent extends React.Component {
 
               <div className="row no-print">
                 <div className="col-12">
+                  <small className="text-muted well well-sm shadow-none" >Les indications ci-dessus sont fournies à titre indicatif.</small>
                   <DownloadDocumentButtonComponent document={this.props.Invoice.last_main_doc} />
                 </div>
               </div>

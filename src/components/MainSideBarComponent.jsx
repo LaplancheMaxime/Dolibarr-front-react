@@ -47,8 +47,8 @@ class MainSideBarComponent extends React.Component {
             <aside className="main-sidebar sidebar-dark-primary elevation-4">
 
                 <a href="/" className="brand-link">
-                <img src={window._env_.REACT_APP_SITE_LOGO_URL_MINI} alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{"opacity": ".8"}}/>
-                <span className="brand-text font-weight-light">{window._env_.REACT_APP_SITE_NAME}</span>
+                <img src={process.env.REACT_APP_SITE_LOGO_URL_MINI} alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{"opacity": ".8"}}/>
+                <span className="brand-text font-weight-light">{process.env.REACT_APP_SITE_NAME}</span>
                 </a>
 
                 <div className="sidebar">
@@ -76,9 +76,9 @@ class MainSideBarComponent extends React.Component {
                                     </p>
                                 </NavLink>
                             </li>
-                            <li className="nav-item has-treeview">
+                            <li style={{'cursor': 'not-allowed'}} title="Non disponible pour le moment" className="nav-item has-treeview">
                                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                <a href="#" className="nav-link disabled">
+                                <a href="#"  className="nav-link disabled">
                                     <i className="nav-icon fas fa-dolly"></i>
                                     <p>
                                         Mes commandes
@@ -86,7 +86,7 @@ class MainSideBarComponent extends React.Component {
                                     </p>
                                 </a>
                             </li>
-                            <li className="nav-item has-treeview">
+                            <li style={{'cursor': 'not-allowed'}} title="Non disponible pour le moment" className="nav-item has-treeview">
                                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                 <a href="#" className="nav-link disabled">
                                     <i className="nav-icon fas fa-file-invoice-dollar"></i>

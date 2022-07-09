@@ -39,6 +39,33 @@ sonarcloud-check:
     - merge_requests
     - master
 
+dockerfile:deploy:hub:develop:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_DOCKER_HUB_USER" -p "$CI_DOCKER_HUB_PASSWORD" $CI_DOCKER_HUB_URL_REGISTRY
+  script:
+    - docker build --pull -t "$CI_DOCKER_HUB_REGISTRY_IMAGE:develop" .
+    - docker push -a $CI_DOCKER_HUB_REGISTRY_IMAGE
+  only:
+    - develop
+
+dockerfile:deploy:hub:master:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_DOCKER_HUB_USER" -p "$CI_DOCKER_HUB_PASSWORD" $CI_DOCKER_HUB_URL_REGISTRY
+  script:
+    - export VERSION=$(docker run --rm -v "$PWD":/app:ro -w /app node:slim node -p "require('./package.json').version")
+    - docker build --pull -t "$CI_DOCKER_HUB_REGISTRY_IMAGE:$VERSION" -t "$CI_DOCKER_HUB_REGISTRY_IMAGE:latest" .
+    - docker push -a $CI_DOCKER_HUB_REGISTRY_IMAGE
+  only:
+    - master
+
 docker:deploy:
   stage: deploy_server
   image: registry.gitlab.com/mlaplanche/gestionformation-sdis14/docker-compose:19.03.11
@@ -54,3 +81,5 @@ docker:deploy:
   tags:
     - docker
     - personal
+  #only:
+   # - master

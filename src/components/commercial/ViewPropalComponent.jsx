@@ -1,13 +1,14 @@
 import Axios from "axios";
 import React from "react";
 import InvoiceTemplateComponent from "../template/InvoiceTemplateComponent";
-import { Compagny } from "../../models/Compagny";
+// import { Compagny } from "../../models/Compagny";
 import { Propal } from "../../models/commercial/Propal";
 import { ThirdParty } from "../../models/ThirdParty";
 import { NavLink, Redirect } from "react-router-dom";
 import { User } from "../../models/User";
 import { AuthContext } from "../../context/Auth";
 import NotificationManager from 'react-notifications/lib/NotificationManager';
+import AcceptOrDeclineCard from "../common/PropalsInvoices/AcceptOrDeclineCard";
 
 export class ViewPropalComponent extends React.Component {
 
@@ -29,22 +30,16 @@ export class ViewPropalComponent extends React.Component {
 
     componentDidMount() {
         Promise.all([
-            Axios.get('/setup/company'),
             Axios.get('/proposals/'+this.props.match.params.id+'?contact_list=0')
         ]).then(results => {
-
-            this.MyCompagny = new Compagny();
-            this.MyCompagny.bindCompagny(results[0].data);
-            this.setState({MyCompagny : this.MyCompagny });
-
             this.Propal = new Propal();
-            this.Propal.bindPropal(results[1].data);
+            this.Propal.bindPropal(results[0].data);
 
             Axios.get('/thirdparties/' + this.Propal.socid).then(thirdparty => {
                 this.Propal.third_party = new ThirdParty();
                 this.Propal.third_party.bindThirdParty(thirdparty.data);
 
-                Axios.get('/users/1').then(commercialContact => {
+                Axios.get('/users/'+this.Propal.user_valid_id).then(commercialContact => {
 
                     this.Propal.comercial_contact = new User();
                     this.Propal.comercial_contact.bindUser(commercialContact.data);
@@ -53,8 +48,6 @@ export class ViewPropalComponent extends React.Component {
                     this.setState({ReadyToGo: true});
                 });
             })
-
-
         }).catch(e => {
             console.log(e);
         });
@@ -71,9 +64,9 @@ export class ViewPropalComponent extends React.Component {
             console.log('result', result);
             this.componentDidMount();
             if (i_status === 2 ) {
-                NotificationManager.success("Votre approbation pour ce devis est bien prise en compte!", "Devis accepté !",7000)
+                NotificationManager.success("Votre approbation pour cette proposition est bien prise en compte!", "Proposition commerciale acceptée !",7000)
             } else if (i_status === 3) {
-                NotificationManager.warning("Vous n'avez pas approuvé ce devis, nous allons vous recontacter rapidement.", "Devis refusé", 7000,);
+                NotificationManager.warning("Vous n'avez pas approuvé cette proposition, nous allons vous recontacter rapidement.", "Porposition commerciale refusée", 7000,);
             }
         })
     }
@@ -82,17 +75,18 @@ export class ViewPropalComponent extends React.Component {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }
+        console.log(this.state);
         return (
             <div>
                 <section className="content-header">
                     <div className="container-fluid">
                         <div className="row mb-2">
                         <div className="col-sm-6">
-                            <h1>Devis</h1>
+                            <h1>Proposition commerciale</h1>
                         </div>
                         <div className="col-sm-6">
                             <ol className="breadcrumb float-sm-right">
-                                <li className="breadcrumb-item"><NavLink to='/propals' >Mes devis</NavLink></li>
+                                <li className="breadcrumb-item"><NavLink to='/propals' >Mes propositions commerciale</NavLink></li>
                                 <li className="breadcrumb-item active">{this.state.Propal?.ref}</li>
                             </ol>
                         </div>
@@ -104,25 +98,8 @@ export class ViewPropalComponent extends React.Component {
                         {this.state.ReadyToGo ?
                             <div className="row">
                                 <div className="col-3">
-                                {this.state.Propal.statut === 1 &&
-                                        <div className="card card-outline card-success">
-                                            <div className="card-header">
-                                                <h3 className="card-title">Informations</h3>
-                                            </div>
-                                            <div className="card-body">
-                                                <h2 className="text-center">{Number(this.state.Propal.total_ttc).toFixed(2)}€</h2>
-                                                <hr/>
-                                                <p>Ce devis est en attente de validation de votre part.</p>
-                                                <div className="row">
-                                                    <div className='col-7'>
-                                                        <button type="button" className="btn btn-block bg-gradient-success" onClick={() => this.validatePropal(2)}><i className="far fa-check-circle"></i> Accepter</button>
-                                                    </div>
-                                                    <div className='col-5'>
-                                                        <button type="button" className="btn btn-block bg-gradient-danger" onClick={() => this.validatePropal(3)}><i className="far fa-times-circle"></i> Refuser</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    {this.state.Propal.statut === 1 &&
+                                        <AcceptOrDeclineCard ttcPrice={this.state.Propal.total_ttc} validate={this.validatePropal} />
                                     }
                                     <div className="card card-outline card-primary">
                                         <div className="card-header">

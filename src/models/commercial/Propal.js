@@ -14,6 +14,7 @@ export class Propal {
         this.date_creation = null;
         this.date_validation = null;
         this.fin_validite = null;
+        this.user_valid_id = null;
         this.total = null;
         this.total_ttc = null;
         this.total_tva = null;
@@ -28,7 +29,6 @@ export class Propal {
     }
 
     bindPropal(propal) {
-        console.log('propal', propal);
         this.id = propal.id;
         this.ref = propal.ref;
         this.ref_client = propal.ref_client;
@@ -42,6 +42,7 @@ export class Propal {
         this.total_tva = propal.total_tva;
         this.note_public = propal.note_public;
         this.tva= propal.tva;
+        this.user_valid_id = propal.user_valid_id;
         this.remise=propal.remise;
         this.remise_percent = propal.remise_percent;
         this.remise_absolue = propal.remise_absolue;

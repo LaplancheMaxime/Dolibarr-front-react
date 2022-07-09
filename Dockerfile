@@ -2,8 +2,10 @@
 FROM node:alpine as build
 WORKDIR /app
 
+
 ENV PATH /app/node_modules/.bin:$PATH
 ENV NODE_ENV=production
+ENV NODE_OPTIONS=--openssl-legacy-provider 
 
 COPY package.json ./
 COPY package-lock.json ./

@@ -2,16 +2,11 @@ version: '3.7'
 
 services:
   app:
-    image: dolibarr-front-react
+    image: maximelaplanche/customerarea4dolibarr:latest
     restart: always
-    ports: 
-      - 8085:80
-    build:
-      context: .
-      dockerfile: ./Dockerfile
     environment:
-      VIRTUAL_HOST: my.mltech.fr
       NODE_ENV: production
+      NODE_OPTIONS: " "
       REACT_APP_SITE_LOGO_URL_MINI: "/dist/img/LogoMLTech_bg_white.png"
       REACT_APP_SITE_LOGO_URL: /dist/img/LogoMLTech.png
       REACT_APP_SITE_NAME: MLTech
@@ -19,11 +14,17 @@ services:
       REACT_APP_API_ADDRESS: https://dolibarr.mltech.fr/api/index.php
       REACT_APP_DOLIBARR_INSTANCE: https://dolibarr.mltech.fr/
       REACT_APP_USER_CONTACT: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mymltech.rule=Host(`my.mltech.fr`)"
+      - "traefik.http.services.mymltech.loadbalancer.server.port=80"
+      - "traefik.http.routers.mymltech.tls=true"
+      - "traefik.docker.network=traefik_traefik"
     networks: 
       - internal
-      - nginx-proxy
+      - traefik_traefik
 
 networks: 
   internal:
-  nginx-proxy:
+  traefik_traefik:
     external: true
